@@ -245,6 +245,7 @@ export const createPortfolioMixin = ({
     nftCreatorAddressListOfCollected() {
       const ownerMap = this.nftClassListOfFilteredCollectedByType.reduce(
         (acc, { classId }) => {
+          // need to guard owner 'undefined'
           const owner = this.getNFTClassMetadataById(classId)?.iscn_owner;
           acc[owner] = acc[owner] || 0;
           acc[owner] += 1;
@@ -255,6 +256,10 @@ export const createPortfolioMixin = ({
       return Object.keys(ownerMap).sort((a, b) => ownerMap[b] - ownerMap[a]);
     },
     nftCreatorInfoListOfCollected() {
+      console.log(
+        'nftCreatorAddressListOfCollected',
+        this.nftCreatorAddressListOfCollected
+      );
       return this.nftCreatorAddressListOfCollected
         .map(id => {
           const user = this.getUserInfoByAddress(id);

@@ -631,6 +631,7 @@ const actions = {
     });
 
     classes.forEach(c => {
+      // await dispatch('fetchNFTClassMetadata', c.id);
       dispatch('parseAndStoreNFTClassMetadata', {
         classId: c.id,
         classData: c,
